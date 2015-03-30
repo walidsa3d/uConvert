@@ -13,24 +13,17 @@ class uconvert:
 		for dic in dics:
 			if src in dic and dest in dic:
 				found=True
-		if found:
-			if src in weight:
-				units=weight
-			if src in length:
-				units=length
-			if src in time:
-				units=time
-			c=amount*units[src]/units[dest]
-			print '%s %s=%s %s' %(amount,src,c,dest)
-		else:
-			print "error"
+				units=dic
+				c=amount*units[src]/units[dest]
+				return '%s %s=%s %s' %(amount,src,c,dest)
+		return "Units must belong to the same category"
 	def main(self):
 		parser = argparse.ArgumentParser(description='Demo')
-		parser.add_argument('amount',help='verbose flag' )
-		parser.add_argument('src',help='verbose flag' )
-		parser.add_argument('dest',help='verbose flag' )
+		parser.add_argument('amount',help='Amount to be converted' )
+		parser.add_argument('src',help='Source Unit' )
+		parser.add_argument('dest',help='Destination Unit' )
  		args = parser.parse_args()
- 		self.convert(args.src,args.dest,float(args.amount))
+ 		print self.convert(args.src,args.dest,float(args.amount))
  
 if __name__ == '__main__':
 	uconvert().main()
